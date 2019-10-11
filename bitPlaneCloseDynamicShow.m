@@ -1,4 +1,4 @@
-function bitPlaneAndErodeDynamicShow(I)
+function bitPlaneCloseDynamicShow(I)
 figHandle = figure;
 for i = 1:8
     bitNPlane = bitPlane(I,i);
