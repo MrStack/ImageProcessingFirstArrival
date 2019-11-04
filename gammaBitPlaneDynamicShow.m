@@ -3,16 +3,17 @@ figHandle = figure;
 set(gcf,'outerposition',get(0,'screensize'));
 % subplot(2,3,6);
 % draw_fill_axes(I,1);
-for i = 1:0.1:6
-    for j = 7        
-        gwave = gammaTransform(I,1,i);        
+for i = 1:0.1:2.7
+    for j = 8        
+        gwave = gammaTransform(I,1,i);                
         subplot(2,3,6);
         showImageWave(gwave,1);        
-        h = fspecial('gaussian',10,2);
-        gwave = imfilter(gwave,h,'symmetric','same');
+%         h = fspecial('gaussian',10,2);
+%         gwave = imfilter(gwave,h,'symmetric','same');
         bitPlaneImage = bitPlane(transform2Image(gwave),j);
-        bitPlaneImage8 = bitPlane(transform2Image(gwave),8);
-        bitPlaneImage = bitPlaneImage+bitPlaneImage8;
+%         bitPlaneImage8 = bitPlane(transform2Image(gwave),8);
+%         bitPlaneImage6 = bitPlane(transform2Image(gwave),6);
+        bitPlaneImage = bitPlaneImage;%+bitPlaneImage8;%+bitPlaneImage6;
         subplot(2,3,1);
         showImageWave(bitPlaneImage,1);        
         title(strcat('\gamma=',num2str(i),' and bitPlane:',num2str(j)));
@@ -41,6 +42,7 @@ for i = 1:0.1:6
         hold on;
         plot(firstArrivals,0:length(firstArrivals)-1,'linestyle','none','marker','o','markersize',5);
         plot(firstArrivalsReference,0:length(firstArrivalsReference)-1,'linestyle','none','marker','o','markersize',5,'color','r');
+        ylabel(strcat('Accuracy:',num2str(accuracy(firstArrivals,firstArrivalsReference,5))));
         hold off;
         
         pause(1);
